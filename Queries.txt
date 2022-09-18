@@ -1,0 +1,50 @@
+/* Query 1 */
+select Album.Title, sum(Track.UnitPrice) as total_prices_of_Albums
+from Album
+join Track
+on Album.AlbumId = Track.AlbumId
+GROUP by Album.Title
+ORDER by total_prices DESC
+LIMIT 10
+
+"The Top 10 Albums has been purchased"
+
+/* Query 2 */
+select Genre.Name, sum(Track.UnitPrice) as total_price_for_this_genre
+from Genre
+join Track
+on Genre.GenreId = Track.GenreId
+GROUP by Genre.Name
+ORDER by total_price_for_this_genre DESC
+limit 10
+
+"The Top 10 Genres has been achived the highest sales"
+
+/* Query 3 */
+SELECT Customer.FirstName, Customer.LastName, sum(InvoiceLine.UnitPrice) as "The amount of UnitPrice has been paid by a Customer"
+from Customer
+join Invoice
+on Customer.CustomerId = Invoice.CustomerId
+join InvoiceLine
+on InvoiceLine.InvoiceId = Invoice.InvoiceId
+GROUP by Customer.FirstName, Customer.LastName
+ORDER by "The amount of UnitPrice has been paid by a Customer" desc
+limit 10
+
+"The Top 10 Customers for Chinook musical store"
+
+/* Query 4 */
+
+select Artist.Name, sum(InvoiceLine.UnitPrice) "The amount of UnitPrice gained by the Artist"
+from Artist
+join Album
+on Artist.ArtistId = Album.ArtistId
+join Track
+on Album.AlbumId = Track.AlbumId
+join InvoiceLine
+on Track.TrackId = InvoiceLine.TrackId
+GROUP by Artist.Name
+order by "The amount of UnitPrice gained by the Artist" desc
+limit 10
+
+"The Top 10 Artists where the sum of unitprices of all their tracks is the most"
